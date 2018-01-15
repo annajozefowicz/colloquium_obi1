@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.4)
 
 #Configuration parameters of cmake
-set(CMAKE_CXX_COMPILER g++)#requires g++ to be available on PATH
-set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_COMPILER clang++)#requires g++ to be available on PATH
+set(CMAKE_C_COMPILER clang)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(Project)

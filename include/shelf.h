@@ -22,10 +22,11 @@ class Shelf
         capacity(_capacity),
         occupied(0)
     {}
-    void push(std::shared_ptr<Item> item) {
-        if (capacity - item->thickness() < 0)
-            throw std::runtime_error("Brak miejsca");
+    bool push(std::shared_ptr<Item> item) {
+        if (occupied + item->thickness() > capacity)
+            return false;
         shelf.emplace_back(std::move(item));
+        return true;
     }
     void print_all() {
         std::string s;
@@ -34,13 +35,16 @@ class Shelf
         }
         std::cout << s;
     }
-    void remove(std::string name)
+    bool remove(std::string name)
     {
-            shelf.erase(std::remove_if(shelf.begin(), shelf.end(),
+        if (shelf.empty())
+            return false;
+        shelf.erase(std::remove_if(shelf.begin(), shelf.end(),
                         [&name](std::shared_ptr<Item> const& item) {
                             return (item->name() == name); 
                             }),
                         shelf.end());
+        return true;
     }
     std::size_t size() const {
         return shelf.size();

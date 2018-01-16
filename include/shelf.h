@@ -35,17 +35,18 @@ class Shelf
         }
         std::cout << s;
     }
+
     bool remove(std::string name)
     {
-        if (shelf.empty())
-            return false;
+        std::size_t orig_size = shelf.size();
         shelf.erase(std::remove_if(shelf.begin(), shelf.end(),
                         [&name](std::shared_ptr<Item> const& item) {
                             return (item->name() == name); 
                             }),
                         shelf.end());
-        return true;
+        return (orig_size - self.size());
     }
+
     std::size_t size() const {
         return shelf.size();
     }
